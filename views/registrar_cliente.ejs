@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>Registrar Cliente</title>
+
+	<link rel="stylesheet" href="/css/cliente.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+
+<%- include("header") %>
+
+<div class="cuerpo-principal">
+
+	<div class="titulo-principal mb-20" style="margin-top: 100px">
+		<h4>Registrar Cliente</h4>
+	</div>
+
+
+	<form class="formulario" action ="/clientes/nuevoCliente" method="POST">
+
+        <label class="mt-20">DNI:</label>
+        <input type="text" name="dni" required>
+		 <!--pattern="\\d{8}[A-HJ-NP-TV-Z]"-->
+
+		<label>Nombre:</label>
+		<input type="text" name="nombre" required>
+
+		<label>Apellido:</label>
+        <input type="text" name="apellido" required>
+
+		<label>Teléfono:</label>
+		<input type="text" name="telf" required>
+
+		<% if (errorMsg) { %>
+		<p style="color:red;text-align: center;font-size: 18px;padding-top: 4px;">
+			<%=errorMsg%>
+		</p>
+		<% } else { %>
+			<p></p>
+		<% } %>
+
+		<div class="formularioboton" style="margin-top: 20px">
+			<button class="btn btn-especial" type="" onclick="back()">Volver</button>
+			<button class="btn" type="submit">Aceptar</button>
+		</div>
+
+	</form>
+
+</div>
+
+<script>
+	function myFunction() {
+	  document.getElementById("mensajeError").style = "display:none";
+	}
+
+	function back() {
+	  window.location.href = "/clientes/0";
+	}
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+

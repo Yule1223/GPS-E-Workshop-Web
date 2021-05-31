@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <title>Vehículo</title>
+    <link rel="stylesheet" href="/css/vehiculo.css"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet"/>
+</head>
+
+<body>
+<%- include("header") %>
+
+<div class="cuerpo-principal" style="width: 50%; margin: 10vh auto">
+    <a href="/vehiculos/registrarVehiculo">
+        <button class="btn mt-50">Nuevo Vehículo</button>
+    </a>
+    <br><br><br>
+    <% if(typeof (vehiculos) !== "undefined" ){ %>
+        <% vehiculos.forEach(function(vehiculo) { %>
+            <a href="/vehiculos/detalleVehiculo/<%= vehiculo.id %>" style="text-decoration:none;">
+                <div class="listado_vehiculos">
+                    <br>
+                    <span>Matrícula: <%= vehiculo.matricula %></span>
+                    <br>
+                </div>
+            </a>
+        <% }); %>
+    <% } %>
+</div>
+
+<div class="pagination">
+    <a onclick="prev()" id="prevButton">&laquo;</a>
+    <a href="/vehiculos/<%= vehiculos.activePage %>" class="paginationNumber" onclick="onClickHandle(event);">
+        <%= parseInt(vehiculos.activePage) + 1 %>
+    </a>
+
+    <!-- mirar lo de que ponga puntos suspensivos -->
+    <a onclick="next()" id="nextButton">&raquo;</a>
+</div>
+</div>
+
+<div class="formularioboton mt-20">
+    <button class="btn btn-especial mb-40" onclick="back()">Volver</button>
+</div>
+
+<script>
+    function onClickHandle(event) {
+        event.target.classList.add("active");
+    }
+
+    function next() {
+        let activePage = parseInt("<%= vehiculos.activePage %>");
+        let maxPages = parseInt("<%= vehiculos.nPages %>");
+        if ((activePage + 1) < maxPages) window.location.href = "/vehiculos/" + (activePage + 1);
+    }
+
+    function prev() {
+        let activePage = parseInt("<%= vehiculos.activePage %>");
+        if ((activePage - 1) >= 0) window.location.href = "/vehiculos/" + (activePage - 1);
+    }
+
+    function back() {
+        window.location.href = "/principal";
+    }
+</script>
+</body>
+</html>

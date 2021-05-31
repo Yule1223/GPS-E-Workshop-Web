@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Principal</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body id="bodyPrincipal">
+
+<%- include("header") %>
+<% if (msg) { %>
+<div id="mensajeConfirmacion">
+    <%=msg%>
+    <button onclick="myFunction()">OK</button>
+</div>
+<% } %>
+
+<script>
+    function myFunction() {
+        document.getElementById("mensajeConfirmacion").style = "display:none";
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Modificar Cliente</title>
+    <link rel="stylesheet" href="/css/cliente.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<%- include("header") %>
+
+<div class="cuerpo-principal">
+
+    <div class="titulo-principal mb-20" style="margin-top: 100px">
+        <h4 id = mensajeInfo>Modificar Cliente</h4>
+    </div>
+
+    <form class="formulario" action ="/clientes/modificarCliente/<%= cliente.id %>" method="POST">
+        <!--<span id="mensajeInfo"></span>-->
+        <label class="mt-20">DNI:</label>
+        <input type="text" name="dni" value="<%= cliente.dni %>" required>
+
+        <label>Nombre:</label>
+        <input type="text" name="nombre" value="<%= cliente.nombre %>" required>
+
+        <label>Apellido:</label>
+        <input type="text" name="apellido" value="<%= cliente.apellido %>" required>
+
+        <label>Teléfono:</label>
+        <input type="text" name="telf" value="<%= cliente.telefono %>" required>
+
+        <% if (errorMsg) { %>
+        <p style="color:red;text-align: center;font-size: 18px;padding-top: 4px;">
+            <%=errorMsg%>
+        </p>
+        <% } else { %>
+            <p></p>
+        <% } %>
+
+        <div class="formularioboton" style="margin-top: 20px">
+            <button class="btn btn-especial" type="button" onclick="back()">Volver</button>
+            <button class="btn" type="">Guardar</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function back() {
+        window.location.href = "/clientes/detalleCliente/<%= cliente.id %>";
+    }
+</script>
+
+</body>
+</html>

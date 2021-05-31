@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Cliente</title>
+    <link rel="stylesheet" href="/css/cliente.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com/%22%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<%- include("header") %>
+
+<div class="cuerpo-principal no-login" style="width: 50%; margin: 10vh auto;">
+    <a href="/clientes/registrarClientes">
+        <button class="btn mt-50">Nuevo Cliente</button>
+    </a>
+    <br><br><br>
+    <% if(typeof (clientes) !== "undefined" ){ %>
+        <% clientes.forEach(function(cliente) { %>
+            <a href="/clientes/detalleCliente/<%= cliente.id %>" style="text-decoration:none;">
+                <div class="listado_clientes">
+                    <br>
+                    <span>DNI: <%= cliente.dni %></span>
+                    <span>Nombre: <%= cliente.nombre %></span>
+                    <span>Apellido: <%= cliente.apellido %></span>
+                    <br>
+                </div>
+            </a>
+        <% }); %>
+    <% } %>
+</div>
+<div class="pagination">
+    <a onclick="prev()" id="prevButton">&laquo;</a>
+    <a href="/clientes/<%= clientes.activePage %>" class="paginationNumber" onclick="onClickHandle(event);">
+        <%= parseInt(clientes.activePage) + 1 %>
+    </a>
+
+    <!-- mirar lo de que ponga puntos suspensivos -->
+    <a onclick="next()" id="nextButton">&raquo;</a>
+</div>
+</div>
+
+<div class="formularioboton mt-20">
+    <button class="btn btn-especial mb-40" onclick="back()">Volver</button>
+</div>
+
+<script>
+    function onClickHandle(event) {
+        event.target.classList.add("active");
+    }
+
+    function next() {
+        let activePage = parseInt("<%= clientes.activePage %>");
+        let maxPages = parseInt("<%= clientes.nPages %>");
+        if ((activePage + 1) < maxPages) window.location.href = "/clientes/" + (activePage + 1);
+    }
+
+    function prev() {
+        let activePage = parseInt("<%= clientes.activePage %>");
+        if ((activePage - 1) >= 0) window.location.href = "/clientes/" + (activePage - 1);
+    }
+
+    function back() {
+        window.location.href = "/principal";
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title id="title1">Ver Vehículo</title>
+    <link rel="stylesheet" href="/css/vehiculo.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<%- include("header") %>
+
+<div class="cuerpo-principal">
+
+    <div class="titulo-principal mb-20" style="margin-top: 100px">
+        <h4 id = mensajeInfo>Ver Vehículo</h4>
+    </div>
+
+    <form class="formulario" action ="/vehiculos/modificarVehiculo/<%= vehiculo.id %>" method="POST">
+        <!--<span id="mensajeInfo"></span>-->
+        <label class="mt-20">Bastidor:</label>
+        <input type="text" id="bastidor" name="bast" placeholder="<%= vehiculo.bastidor %>" readonly="readonly" required>
+
+        <label>Matrícula:</label>
+        <input type="text" id="matricula" name="mat" placeholder="<%= vehiculo.matricula%>" readonly="readonly" required>
+
+        <label>KMs:</label>
+        <input type="text" id="kilometros" name="kms" placeholder="<%= vehiculo.kms %>" readonly="readonly" required>
+
+        <label>Capacidad plena de carga:</label>
+        <input type="text" id="capacidadPlena" name="capacidad" placeholder="<%= vehiculo.capacidad_carga %>" readonly="readonly" required>
+
+        <label>Potencia:</label>
+        <input type="text" id="potencia" name="`pot`" placeholder="<%= vehiculo.potencia %>" readonly="readonly" required>
+
+        <label>Velocidad de carga:</label>
+        <input type="text" id="velocidadCarga" name="velocidad" placeholder="<%= vehiculo.velocidad_carga %>" readonly="readonly" required>
+
+        <label>Id Cliente:</label>
+        <a href="/clientes/detalleCliente/<%= vehiculo.id_cliente %>">
+            <input style="cursor: pointer" type="text" id="idCliente" name="cliente" placeholder="<%= vehiculo.id_cliente %>" readonly="readonly" required>
+        </a>
+
+        <div class="formularioboton" style="margin-top: 20px">
+            <button class="btn btn-especial" type="button" onclick="back1()" id="volver1">Volver</button>
+            <!--<button class="btn" type="button" onclick="edit()" id="editarV">Modificar</button>-->
+            <button class="btn no-display btn-especial" type="button" onclick="back2()" id="volver2">Volver</button>
+            <button class="btn no-display" type="submit" id="aceptarEditarV">Guardar</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function back1() {
+        window.location.href = "/vehiculos/0";
+    }
+
+    function back2() {
+        window.location.href = "/vehiculo/detalleVehiculo/<%= vehiculo.id %>";
+    }
+
+    function edit() {
+        //muestra mensaje
+        document.getElementById("mensajeInfo").innerText = "Modificar Vehiculo"
+        let inputs = document.querySelectorAll(".formulario input");
+        //se quitan el atributo de los inputs y se rellenan los input con valores
+        for (let index = 0; index < inputs.length; index++) {
+            inputs[index].removeAttribute("readonly");
+        }
+        inputs[0].setAttribute("value", "<%= vehiculo.bastidor %>");
+        inputs[1].setAttribute("value", "<%= vehiculo.matricula %>");
+        inputs[2].setAttribute("value", "<%= vehiculo.kms %>");
+        inputs[3].setAttribute("value", "<%= vehiculo.capacidad_carga %>");
+        inputs[4].setAttribute("value", "<%= vehiculo.potencia %>");
+        inputs[5].setAttribute("value", "<%= vehiculo.velocidad_carga %>");
+        inputs[6].setAttribute("value", "<%= vehiculo.id_cliente %>");
+
+        //oculta editar y muestra aceptar
+        document.getElementById("editarV").classList.add("no-display");
+        document.getElementById("aceptarEditarV").classList.remove("no-display");
+        //oculta boton volver1 y muestra boton volver2
+        document.getElementById("volver1").classList.add("no-display");
+        document.getElementById("volver2").classList.remove("no-display");
+        //cambiar el titulo de pagina
+        document.getElementById("title1").innerText = "Modificar Vehiculo"
+    }
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

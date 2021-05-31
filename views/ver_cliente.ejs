@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title id="title1">Ver Cliente</title>
+    <link rel="stylesheet" href="/css/cliente.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<%- include("header") %>
+
+<div class="no-display" id="mensajeConfirmacion">
+    <span>¿Estás seguro?</span>
+    <div>
+        <button onclick="denegarBaja()">No</button>
+        <button onclick="aceptarBaja()">Sí</button>
+    </div>
+</div>
+
+
+<div class="cuerpo-principal">
+
+    <div class="titulo-principal mb-20" style="margin-top: 100px">
+        <h4 id = mensajeInfo>Ver Cliente</h4>
+    </div>
+
+    <form class="formulario" action ="/clientes/modificarCliente/<%= cliente.id %>" method="POST">
+        <!--<span id="mensajeInfo"></span>-->
+        <label class="mt-20">DNI:</label>
+        <input type="text" id="inputdni" name="dni" placeholder="<%= cliente.dni %>" readonly="readonly" required>
+
+        <label>Nombre:</label>
+        <input type="text" id="inputnombre" name="nombre" placeholder="<%= cliente.nombre %>" readonly="readonly" required>
+
+        <label>Apellido:</label>
+        <input type="text" id="inputapell" name="apellido" placeholder="<%= cliente.apellido %>" readonly="readonly" required>
+
+        <label>Teléfono:</label>
+        <input type="text" id="inputtelf" name="telf" placeholder="<%= cliente.telefono %>" readonly="readonly" required>
+
+        <% if (errorMsg) { %>
+        <p style="color:red;text-align: center;font-size: 18px;padding-top: 4px;">
+            <%=errorMsg%>
+        </p>
+        <% } else { %>
+            <p></p>
+        <% } %>
+
+        <div class="formularioboton" style="margin-top: 20px">
+            <button class="btn btn-especial" type="button" onclick="back1()" id="volver1">Volver</button>
+            <button class="btn" type="button" onclick="edit()" id="editarV">Modificar</button>
+            <button class="btn" type="button" onclick="remove()" id="bajaCliente">Baja</button>
+            <button class="btn no-display btn-especial" type="button" onclick="back2()" id="volver2">Volver</button>
+            <button class="btn no-display" type="submit" id="aceptarEditarV">Guardar</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById("volver1").addEventListener("click",function() {
+            window.history.back();
+    },false);
+
+    function back1() {
+        window.location.href = "/clientes/0";
+    }
+
+    function back2() {
+        window.location.href = "/clientes/detalleCliente/<%= cliente.id %>";
+    }
+
+    function edit() {
+        //muestra mensaje
+        document.getElementById("mensajeInfo").innerText = "Modificar Cliente"
+        let inputs = document.querySelectorAll(".formulario input");
+        //se quitan el atributo de los inputs y se rellenan los input con valores
+        for (let index = 0; index < inputs.length; index++) {
+            inputs[index].removeAttribute("readonly");
+        }
+        inputs[0].setAttribute("value", "<%= cliente.dni %>");
+        inputs[1].setAttribute("value", "<%= cliente.nombre %>");
+        inputs[2].setAttribute("value", "<%= cliente.apellido %>");
+        inputs[3].setAttribute("value", "<%= cliente.telefono %>");
+        //oculta editar y muestra aceptar
+        document.getElementById("editarV").classList.add("no-display");
+        document.getElementById("aceptarEditarV").classList.remove("no-display");
+        //oculta boton volver1 y muestra boton volver2
+        document.getElementById("volver1").classList.add("no-display");
+        document.getElementById("volver2").classList.remove("no-display");
+        //oculta boton bajaCliente
+        document.getElementById("bajaCliente").classList.add("no-display");
+        //cambiar el titulo de pagina
+        document.getElementById("title1").innerText = "Modificar Cliente"
+    }
+
+    function remove(){
+        document.getElementById("mensajeConfirmacion").classList.remove("no-display");
+    }
+
+    function aceptarBaja(){
+        window.location.href = "/clientes/bajaCliente/<%= cliente.id %>";
+    }
+
+    function denegarBaja(){
+        document.getElementById("mensajeConfirmacion").classList.add("no-display");
+    }
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

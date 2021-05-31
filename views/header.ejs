@@ -1,0 +1,20 @@
+<header>
+    <div class="barraNavegacion">
+        <% if (userType === "administrativo") { %>
+            <a href="/empleados"><button class="btn">Empleados</button></a>
+            <a href="/clientes/0"><button class="btn ml-5">Clientes</button></a>
+            <div class="icono"><a href="/principal"><img src="/img/LogoGPS.png"></a></div>
+            <a href="/vehiculos/0"><button class="btn ml-5">Vehículos</button></a>
+            <a href="/logout"><button class="btn ml-5">LogOut</button></a>
+        <% } %>
+            <%if(userType === "jefe de taller") { %>
+                <a href=""><button class="btn">ORs</button></a>
+                <div class="icono"><a href="/principal"><img src="/img/LogoGPS.png"></a></div>
+                <a href="/logout"><button class="btn ml-5">LogOut</button></a>
+            <% } %>
+            <%if(userType === "mecanico") {%>
+                <div class="icono"><a href="/principal"><img src="/img/LogoGPS.png"></a></div>
+                <a href="/logout"><button class="btn ml-5">LogOut</button></a>
+            <% } %>
+    </div>
+</header>

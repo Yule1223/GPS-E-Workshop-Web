@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Registrar Vehiculo</title>
+
+    <link rel="stylesheet" href="/css/vehiculo.css"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet"/>
+</head>
+
+<body>
+<%- include("header") %>
+
+<div class="cuerpo-principal">
+    <div class="titulo-principal mb-20" style="margin-top: 100px">
+        <h4>Registrar Vehículo</h4>
+    </div>
+
+    <form class="formulario mt-10" action="/vehiculos/insertarVehiculo" method="POST">
+        <label>Id del cliente:</label>
+        <input type="number" name="idCliente" required/>
+
+        <label>Matrícula:</label>
+        <input type="text" name="matricula" required/>
+
+        <label>Bastidor:</label>
+        <input type="text" name="bastidor" required/>
+
+        <label>Capacidad de carga:</label>
+        <input type="number" step="0.01" name="capacidadCarga" required/>
+
+        <label>Potencia:</label>
+        <input type="number"  step="0.01" name="potencia" required/>
+
+        <label>KMs:</label>
+        <input type="number" name="kms" maxlength="7" required/>
+
+        <label>Velocidad de carga:</label>
+        <input type="number" step="0.01" name="velocidadCarga" required/>
+
+        <% if (msg) { %>
+        <p style="color:red;text-align: center;font-size: 18px;padding-top: 4px;">
+            <%= msg %>
+        </p>
+        <% } else { %>
+            <p></p>
+        <% } %>
+
+        <div class="formularioboton" style="margin-top: 20px">
+            <button class="btn btn-especial" type="" onclick="back()">Volver</button>
+            <button class="btn" type="submit">Registrar</button>
+        </div>
+    </form>
+</div>
+
+<script>
+      function back() {
+        window.location.href = "/vehiculos";
+    }
+</script>
+</body>
+
+</html>
